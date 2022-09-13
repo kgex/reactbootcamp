@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import User from './User';
+import UserCard from './UserCard';
 
-function App() {
+function App(props) {
+  console.log(props)
+
+  const [val, setHomeVal] = useState(0);
+  const [users, serUsers] = useState([{ 'name': "Jane" }, { 'name': "John" }, { 'name': "Raju" }])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>
+        content {props.title}
+        <br />
+        {props.name}
+        <br />
+        {val}
+        <br />
+        <button onClick={() => setHomeVal(val + 1)}>Click</button>
+
+        {val % 2 === 0 ? <p>Even</p> : <p>Odd</p>}
+
+
+        {users.map((user) =>
+          <UserCard homeVal={val} name={user.name} setHomeVal={setHomeVal} />
+        )}
+      </p>
     </div>
   );
 }
